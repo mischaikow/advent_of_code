@@ -41,7 +41,18 @@ def closest_node(nodeList):
             nearestNode = i
 
     return nearestNode
-            
+
+
+# Create a dictionary of wire length to reach nodes
+def node_distances(nodeSet, wirePath):
+    result = {}
+    count = 0
+    for node in wirePath:
+        if node in nodeSet:
+            result[node] = count
+        count += 1
+    return result
+
 
 # Read file
 command_file = open("input.txt", "r")
@@ -62,3 +73,17 @@ matches = pathOneVisit & pathTwoVisit
 
 print closest_node(matches)
 print node_distance(closest_node(matches))
+
+# Build each dictionary of distance of wire to the node
+pathOneDict = node_distances(matches, pathOne)
+pathTwoDict = node_distances(matches, pathTwo)
+
+# Compare the two dictionaries of distances ot get the shortest sum path
+totalDistance = 0
+for node in matches:
+    newDistance = pathOneDict[node] + pathTwoDict[node]
+    if newDistance < totalDistance or totalDistance == 0:
+        totalDistance = newDistance
+
+print totalDistance
+
