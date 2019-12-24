@@ -24,7 +24,7 @@ commands = command_file.readline().split(",")
 commands[-1] = commands[-1].replace("\n",'')
 commands_int = list(map(int, commands))
 
-commands_int[1] = 12
+commands_int[1] = 98
 commands_int[2] = 2
 
 print commands_int

@@ -1,0 +1,25 @@
+##  Part one is a math problem
+## Two adjacent digits are the same
+## Digits are monotonically increasing
+## Range is 134799 to 669999 inclusive
+## How many 6-digit combos are there?
+
+##  We could build this using a tree of some sort where each node has
+## a few rules:
+##   - Nodes can be "on" or "off". A node is "on" if repeated digits appear
+##         anywhere above. Otherwise the node is "off". If the leaf if "off"
+##         the node is not counted
+##   - Nodes that match the above node are immediately marked as "on"
+##   - Nodes that do not match the above node keep whatever marking the
+##         above node has
+##   - Each leaf must be within the range to be counted
+
+import math
+
+def digit_count(number):
+    return int(math.log10(number)) + 1
+
+def node(isOn, number):
+    if digit_count(number) == 6:
+        
+    
