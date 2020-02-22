@@ -102,6 +102,7 @@ class Interpreter:
             elif opcode == 3:
                 self.write_param(instruction[2], self.pointer + 1, signal)
                 self.pointer += 2
+                return -1
 
             # Output
             elif opcode == 4:
