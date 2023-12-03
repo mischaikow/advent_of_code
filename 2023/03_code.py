@@ -47,7 +47,6 @@ def part2(str_list):
                     values.append(pull_number(str_list, i, j+1))
 
                 if len(values) == 2:
-                    print(f'At coord ({i}, {j}) -- first num: {values[0]}, second num: {values[1]}')
                     ans += values[0] * values[1]
 
     print(ans)
@@ -59,7 +58,6 @@ def pull_number(str_list, i, j):
 
     ans = 0
     while j < len(str_list[0]) and str_list[i][j].isdigit():
-        print(ans)
         ans = ans*10 + int(str_list[i][j])
         j += 1
 
