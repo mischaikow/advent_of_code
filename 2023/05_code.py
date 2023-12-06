@@ -30,15 +30,38 @@ def map_seed_1(x, map_list):
 
 def part2(input_list):
   seeds_raw = [int(x) for x in input_list[0][input_list[0].find(':')+2:].split()]
-  loc_list = []
   i = 0
+  locs = []
   while i < len(seeds_raw):
-    loc_list.append((seeds_raw[i], seeds_raw[i]+seeds_raw[i+1]))
+    locs.append((seeds_raw[i], seeds_raw[i]+seeds_raw[i+1]))
     i += 2
 
+  locs_next = []
+  for line in input_list[1:]:
+    print(len(locs + locs_next))
+    if line == '':
+      locs += locs_next
+      locs_next = []
 
-  print(loc_list)
-    
+    elif line[0].isdigit():
+      temp = []
+      values_raw = [int(x) for x in line.split()]
+      for bloc in locs:
+        if bloc[0] > values_raw[1] + values_raw[2] or bloc[1] < values_raw[1]:
+          temp.append(bloc)
+        else:
+          if bloc[0] < values_raw[1]:
+            temp.append((bloc[0], values_raw[1]-1))
+          if bloc[1] > values_raw[1] + values_raw[2]:
+            temp.append((values_raw[1] + values_raw[2], bloc[1]))
+          convert = (
+              max(0, bloc[0]-values_raw[1]) + values_raw[0],
+              min(bloc[1]-values_raw[1], values_raw[2]) + values_raw[0]
+              )
+          locs_next.append(convert)
+      locs = temp
+
+  print(min(locs + locs_next))
 
 
 def file_reader(file_name):
