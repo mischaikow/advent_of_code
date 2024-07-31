@@ -18,7 +18,32 @@ def part1(accounting_blob: str) -> int:
 
 def part2(accounting_blob: str):
   data = json.loads(accounting_blob)
-  print(data)
+  stack = [data]
+
+  ans = 0
+
+  while len(stack) > 0:
+    pointer = stack.pop()
+    if isinstance(pointer, list):
+      stack += pointer
+    elif isinstance(pointer, int):
+      ans += pointer
+    elif isinstance(pointer, dict):
+      temp = 0
+      temp_stack = []
+      for v in pointer.values():
+        if v == 'red':
+          temp = 0
+          temp_stack = []
+          break
+        if isinstance(v, int):
+          temp += v
+        elif isinstance(v, list) or isinstance(v, dict):
+          temp_stack.append(v)
+      stack += temp_stack
+      ans += temp
+
+  return ans
   
 
 def file_reader(file_name):
@@ -29,5 +54,5 @@ def file_reader(file_name):
   return inputs_raw[0]
 
 ## print(file_reader('12_input.txt'))
-print(part1(file_reader('12_input.txt')))
-print(part2(file_reader('12_input.txt')))
+print(f"Part 1: {part1(file_reader('12_input.txt'))}")
+print(f"Part 2: {part2(file_reader('12_input.txt'))}")

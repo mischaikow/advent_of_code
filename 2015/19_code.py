@@ -60,7 +60,6 @@ def part2(legal_transforms: List[str]) -> None:
         stack.append((a_compound, depth+1))
 
 
-
 def file_reader(file_name):
   input_file = open(file_name, 'r')
   inputs_raw = input_file.readlines()
