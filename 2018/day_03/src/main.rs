@@ -7,9 +7,7 @@ fn main() {
     let contents = fs::read_to_string(filename)
         .expect("Should have been able to read file.");
 
-    let claims = contents; //.split("\n");
-
-    let mut cloth = [[0; 1000]; 1000];
+    let claims = contents;
     
     let re = Regex::new(r"#([0-9]+) @ ([0-9]+),([0-9]+): ([0-9]+)x([0-9]+)").unwrap();
     let mut claims_vector = vec![];
@@ -20,6 +18,8 @@ fn main() {
                             size_j.parse::<usize>().expect("not a number?"),
                             id.parse::<u16>().expect("not a number?")))
     }
+
+    let mut cloth = [[0; 1000]; 1000];
 
     for claim in claims_vector.clone() {
         for i in claim.0..claim.0+claim.2 {
