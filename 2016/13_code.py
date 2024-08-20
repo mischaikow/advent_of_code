@@ -1,4 +1,4 @@
-from collections import deque, defaultdict
+from collections import deque
 
 
 def is_open_space(x: int, y: int, favorite: int) -> int:
